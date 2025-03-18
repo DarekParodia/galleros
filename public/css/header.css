@@ -1,14 +1,50 @@
-header{
-    width: 100%;
+header {
+    max-width: 100%; /* Ensure the header does not exceed the viewport width */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    height: 52px; /* Set header height to 52px */
+    padding: 0 30px; /* Adjust padding to fit the height */
+    background: linear-gradient(90deg, #343a40, #495057); /* Darker grey gradient background */
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slightly darker shadow */
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    box-sizing: border-box; /* Include padding in width calculations */
 }
 
-header ul{
+header .logo img {
+    height: 40px; /* Adjust logo height */
+    width: auto; /* Maintain aspect ratio */
+    padding: 5px; /* Add padding to make the logo smaller */
+    box-sizing: border-box; /* Ensure padding is included in the dimensions */
+}
+
+header nav ul {
     list-style-type: none;
     display: flex;
-    flex-direction: row;
-    width: fit-content;
+    flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+    padding: 0;
+    margin: 0;
+    gap: 25px; /* Increase spacing between menu items */
+}
+
+header nav li {
+    margin: 0; /* Remove individual margins to avoid conflicts */
+}
+
+header nav a {
+    padding: 8px 15px; /* Add more padding for better clickability */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem; /* Slightly larger font size */
+    border-radius: 5px; /* Add rounded corners */
+    transition: background-color 0.3s, color 0.3s; /* Smooth hover effect */
+    white-space: nowrap; /* Prevent text from breaking into multiple lines */
+}
+
+header nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+    color: #adb5bd; /* Lighter grey hover color */
 }
