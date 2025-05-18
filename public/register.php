@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-    <?php include "../php/head.php" ?>
+    <?php include "../php/partials/head.php" ?>
     <link rel="stylesheet" href="./css/tiles.css">
     <script src="./js/register.js"></script>
     <title>Galeros - Register</title>
 </head>
 
 <body>
-    <?php include "../php/header.php" ?>
+    <?php include "../php/partials/header.php" ?>
     <div class="content-container">
         <section class="gallery-section">
             <h1 class="section-header">Utwórz Konto</h1>

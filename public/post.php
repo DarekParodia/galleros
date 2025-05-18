@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <?php include "../php/head.php" ?>
+    <?php include "../php/partials/head.php" ?>
     <link rel="stylesheet" href="./css/post.css">
     <title>Galeros - Post</title>
 </head>
 
 <body>
-    <?php include "../php/header.php" ?>
+    <?php include "../php/partials/header.php" ?>
     <div class="content-container">
         <button onclick="history.back()" class="go-back-button">Go Back</button> <!-- Go Back Button -->
         <section class="post-section">

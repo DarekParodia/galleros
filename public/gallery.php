@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-    <?php include "../php/head.php" ?>
+    <?php include "../php/partials/head.php" ?>
     <link rel="stylesheet" href="./css/tiles.css">
     <link rel="stylesheet" href="./css/gallery.css">
     <title>Galeros - Gallery</title>
 </head>
 
 <body>
-    <?php include "../php/header.php" ?>
+    <?php include "../php/partials/header.php" ?>
     <div class="content-container">
         <section class="gallery-section">
             <div class="gallery-header">
