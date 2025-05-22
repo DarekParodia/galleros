@@ -38,11 +38,7 @@ class Gallery {
     }
 
     public function toJSON(): string {  
-        return json_encode([
-            'id' => $this->id,
-            'name' => $this->name,
-            'author' => $this->author->toJSON()
-        ]);
+        return json_encode($this->toArray());
     }
 
     public function toArray(): array {

@@ -1,15 +1,49 @@
 <?php
 
-/*
-    Post api
+require_once "../../php/post.php";
+require_once "../../php/gallery.php";
+require_once "../../php/comment.php";
+require_once "../../php/database.php";
 
-    it is used to get, update, delete and create posts in a specific gallery
-    dir:
+function getPost(int $q)
+{
+    global $db;
+    $sql = "SELECT * FROM posts WHERE id = $q";
+    $row = $db->query($sql)[0];
+    if (!$row) return null;
+    $post = new Post($row['id']);
+    return $post;
+}
 
-    GET: 
-        q: id of post
+function getAllPosts()
+{
+    global $db;
+    $posts = $db->getAll('posts');
+    $posts = array_map(function ($post) {
+        return new Post($post['id']);
+    }, $posts);
+    return $posts;
+}
 
+// ==========
+// API
+// ==========
 
-*/
-
-function getPost(int $q) {}
+// GET
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    header('Content-Type: application/json');
+    if (isset($_GET['id'])) {
+        $post = getPost($_GET['id']);
+        if ($post) {
+            echo $post->toJSON();
+        } else {
+            echo json_encode(['error' => 'Post not found']);
+        }
+    } else {
+        $posts = getAllPosts();
+        $posts_arr = array_map(function ($post) {
+            return $post->toArray();
+        }, $posts);
+        echo json_encode($posts_arr);
+    }
+}

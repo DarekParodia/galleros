@@ -30,8 +30,8 @@ function getAllGalleries()
 // ==========
 
 // GET
-// if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-if (true) {
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+// if (true) {
     header('Content-Type: application/json');
     if (isset($_GET['id'])) {
         $gallery = getGallery($_GET['id']);
