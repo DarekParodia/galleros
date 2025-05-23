@@ -4,10 +4,14 @@ class Database {
     private $con;
 
     public function __construct() {
-        $this->con = new mysqli('localhost', 'darekparodia', '', 'galleros', 3306);
+        $this->con = new mysqli('192.168.1.207', 'darekparodia', '', 'galleros', 3306);
 
         if ($this->con->connect_error) {
-            die("Connection failed: " . $this->con->connect_error);
+            // die("Connection failed: " . $this->con->connect_error);
+            $this->con = new mysqli('localhost', 'darekparodia', '', 'galleros', 3306);
+            if ($this->con->connect_error) {
+                die("Connection failed: " . $this->con->connect_error);
+            }
         } else {
             // echo "Connected successfully";
         }

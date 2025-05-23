@@ -1,9 +1,9 @@
 <?php
 
-require_once '../../php/user.php';
-require_once '../../php/post.php';
-require_once '../../php/database.php';
-require_once '../../php/gallery.php';
+require_once '../../php/_user.php';
+require_once '../../php/_post.php';
+require_once '../../php/_database.php';
+require_once '../../php/_gallery.php';
 
 function getGallery(int $q)
 {

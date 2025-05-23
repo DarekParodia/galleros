@@ -1,7 +1,7 @@
 <?php 
 
-require_once 'user.php';
-require_once 'database.php';
+require_once '_user.php';
+require_once '_database.php';
 
 class Gallery {
     private int $id;

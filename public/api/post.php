@@ -1,9 +1,9 @@
 <?php
 
-require_once "../../php/post.php";
-require_once "../../php/gallery.php";
-require_once "../../php/comment.php";
-require_once "../../php/database.php";
+require_once "../../php/_post.php";
+require_once "../../php/_gallery.php";
+require_once "../../php/_comment.php";
+require_once "../../php/_database.php";
 
 function getPost(int $q)
 {

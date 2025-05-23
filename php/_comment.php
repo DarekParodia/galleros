@@ -1,7 +1,8 @@
 <?php 
 
-require_once 'user.php';
-require_once 'database.php';
+require_once '_user.php';
+require_once '_post.php';
+require_once '_database.php';
 
 class Comment {
     private int $id;
@@ -16,7 +17,7 @@ class Comment {
         $row = $db->query($sql)[0];
         if (!$row) return null;
         $this->id = $row['id'];
-        $this->author = $row['author'];
+        $this->author = new User($row['author']);
         $this->likes = $row['likes'];
         $this->dislikes = $row['dislikes'];
         $this->post = new Post($row['post']);

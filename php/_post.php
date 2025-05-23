@@ -1,5 +1,8 @@
 <?php 
 
+require_once '_gallery.php';
+require_once '_database.php';
+
 class Post {
     private int $id;
     private string $title;
