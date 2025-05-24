@@ -43,6 +43,14 @@ class Database {
             return [];
         }
     }
+
+    public function lastInsertId() {
+        return $this->con->insert_id;
+    }
+
+    public function lastQuerrySuccessful() {
+        return $this->con->affected_rows > 0;
+    }
 }
 
 // Create a global object for the Database class
