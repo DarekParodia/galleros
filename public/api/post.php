@@ -15,6 +15,18 @@ function getPost(int $q)
     return $post;
 }
 
+function getPostsByGallery(int $gallery_id)
+{
+    global $db;
+    $sql = "SELECT * FROM posts WHERE gallery = $gallery_id";
+    $rows = $db->query($sql);
+    if (!$rows) return [];
+    $posts = array_map(function ($row) {
+        return new Post($row['id']);
+    }, $rows);
+    return $posts;
+}
+
 function getAllPosts()
 {
     global $db;
@@ -69,7 +81,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         } else {
             echo json_encode(['error' => 'Post not found']);
         }
-    } else {
+    } else if (isset($_GET['gallery'])) {
+        $gallery_id = intval($_GET['gallery']);
+        $posts = getPostsByGallery($gallery_id);
+        if (empty($posts)) {
+            echo json_encode(['error' => 'No posts found for this gallery']);
+        } else {
+            $posts_arr = array_map(function ($post) {
+                return $post->toArray();
+            }, $posts);
+            echo json_encode($posts_arr);
+        }
+    } 
+    
+    else {
         $posts = getAllPosts();
         $posts_arr = array_map(function ($post) {
             return $post->toArray();
