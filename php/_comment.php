@@ -10,6 +10,7 @@ class Comment {
     private int $likes;
     private int $dislikes;
     private Post $post;
+    private ?string $content = null; // Optional content field
     public function __construct(int $id = null) {
         // fetch the comment from the database
         global $db;
@@ -21,6 +22,9 @@ class Comment {
         $this->likes = $row['likes'];
         $this->dislikes = $row['dislikes'];
         $this->post = new Post($row['post']);
+        if (isset($row['content'])) {
+            $this->content = $row['content']; // Optional content field
+        }
     }
 
     // Getters
@@ -40,7 +44,8 @@ class Comment {
             'author' => $this->author->toArray(),
             'likes' => $this->likes,
             'dislikes' => $this->dislikes,
-            'post'=> $this->post->toArray()
+            'post'=> $this->post->toArray(),
+            'content' => $this->content // Optional content field
         ];
     }
 }

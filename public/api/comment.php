@@ -5,6 +5,8 @@ require_once '../../php/_post.php';
 require_once '../../php/_database.php';
 require_once '../../php/_comment.php';
 
+session_start();
+
 function getComment(int $q)
 {
     global $db;
@@ -69,7 +71,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         } else {
             echo json_encode(['error' => 'Comment not found']);
         }
-    } else {
+    } else if(isset($_GET['post'])) {
+        $post_id = (int)$_GET['post'];
+        $comments = $db->query("SELECT * FROM comments WHERE post = $post_id");
+        if (!$comments) {
+            echo json_encode(['error' => 'No comments found for this post']);
+            return;
+        }
+        $comments_arr = array_map(function ($comment) {
+            return (new Comment($comment['id']))->toArray();
+        }, $comments);
+        echo json_encode($comments_arr);
+    } 
+    else{
         $comments = getAllComments();
         $comments_arr = array_map(function ($comment) {
             return $comment->toArray();
@@ -79,9 +93,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
     $data = json_decode(file_get_contents('php://input'), true);
-    if (isset($data['content']) && isset($data['user_id']) && isset($data['post_id'])) {
+    if (isset($data['content']) && isset($data['post_id'])) {
         try {
-            $comment = createComment($data['content'], $data['user_id'], $data['post_id']);
+            $comment = createComment($data['content'], $_SESSION['user_id'], $data['post_id']);
             if ($comment) {
                 echo $comment->toJSON();
             } else {
@@ -91,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             echo json_encode(['error' => 'An error occurred: ' . $e->getMessage()]);
         }
     } else {
-        echo json_encode(['error' => 'Invalid request', 'message' => 'Content, user_id, and post_id are required', 'data' => $data]);
+        echo json_encode(['error' => 'Invalid request', 'message' => 'Content, and post_id are required', 'data' => $data]);
     }
 } else if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
     header('Content-Type: application/json');
