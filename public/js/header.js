@@ -4,6 +4,7 @@ $(document).ready(function() {
     if ($.cookie('logged_in') === 'true') {
         const username = $.cookie('username');
         navRight.html(`
+            <a href="./upload.html" class="nav-link">Upload</a>
             <a href="./logout.html"><span class="nav-link">${username}</span></a>
         `);
     } else {

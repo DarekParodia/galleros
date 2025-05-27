@@ -37,11 +37,13 @@ class Database {
 
     public function query(string $sql) {
         $result = $this->con->query($sql);
-        if ($result->num_rows > 0) {
-            return $result->fetch_all(MYSQLI_ASSOC);
-        } else {
-            return [];
+        if ($result === true) {
+            return true; // For INSERT, UPDATE, DELETE queries
         }
+        if ($result && $result->num_rows > 0) {
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+        return [];
     }
 
     public function lastInsertId() {
