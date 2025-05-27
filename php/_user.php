@@ -1,5 +1,7 @@
 <?php 
 
+require_once '_database.php'; // Assuming db.php contains the database connection logic
+
 class User {
     private int $id;
     private string $name;
