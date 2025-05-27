@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 23, 2025 at 09:36 AM
--- Server version: 11.7.2-MariaDB
--- PHP Version: 8.4.6
+-- Generation Time: Maj 27, 2025 at 11:15 PM
+-- Wersja serwera: 11.7.2-MariaDB
+-- Wersja PHP: 8.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `galleros`
+-- Baza danych: `galleros`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Struktura tabeli dla tabeli `comments`
 --
 
 CREATE TABLE `comments` (
@@ -32,20 +32,22 @@ CREATE TABLE `comments` (
   `author` int(11) NOT NULL,
   `likes` int(11) DEFAULT 0,
   `dislikes` int(11) DEFAULT 0,
-  `post` int(11) NOT NULL
+  `post` int(11) NOT NULL,
+  `content` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `comments`
+-- Zrzut danych tabeli `comments`
 --
 
-INSERT INTO `comments` (`id`, `author`, `likes`, `dislikes`, `post`) VALUES
-(1, 1, 125, 125, 1);
+INSERT INTO `comments` (`id`, `author`, `likes`, `dislikes`, `post`, `content`) VALUES
+(7, 18, 0, 0, 7, 'bardzo ladne miasto'),
+(8, 19, 0, 0, 7, 'zgadzam się z user');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `galleries`
+-- Struktura tabeli dla tabeli `galleries`
 --
 
 CREATE TABLE `galleries` (
@@ -55,16 +57,16 @@ CREATE TABLE `galleries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `galleries`
+-- Zrzut danych tabeli `galleries`
 --
 
 INSERT INTO `galleries` (`id`, `name`, `author`) VALUES
-(1, 'galer', 1);
+(14, 'vanc', 18);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- Struktura tabeli dla tabeli `posts`
 --
 
 CREATE TABLE `posts` (
@@ -76,16 +78,16 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `posts`
+-- Zrzut danych tabeli `posts`
 --
 
 INSERT INTO `posts` (`id`, `title`, `likes`, `dislikes`, `gallery`) VALUES
-(1, 'hee', 24, 12, 1);
+(7, 'ouver', 0, 0, 14);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktura tabeli dla tabeli `users`
 --
 
 CREATE TABLE `users` (
@@ -95,18 +97,19 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Zrzut danych tabeli `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(1, 'pedalito', '123');
+(18, 'user', '$2y$12$shHrYOUMQ7JVZOJ/XWKIqO3XpxZOwNY.SQxnpLse8nnQXD0tVW.Wi'),
+(19, 'user2', '$2y$12$YSJul/8e.N.AonnuTdXwK.QUtc1Y1c0NCTDQuUsimcbtfcoYYJITu');
 
 --
--- Indexes for dumped tables
+-- Indeksy dla zrzutów tabel
 --
 
 --
--- Indexes for table `comments`
+-- Indeksy dla tabeli `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
@@ -114,73 +117,73 @@ ALTER TABLE `comments`
   ADD KEY `post` (`post`);
 
 --
--- Indexes for table `galleries`
+-- Indeksy dla tabeli `galleries`
 --
 ALTER TABLE `galleries`
   ADD PRIMARY KEY (`id`),
   ADD KEY `author` (`author`);
 
 --
--- Indexes for table `posts`
+-- Indeksy dla tabeli `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `gallery` (`gallery`);
 
 --
--- Indexes for table `users`
+-- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT dla zrzuconych tabel
 --
 
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT dla tabeli `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `galleries`
+-- AUTO_INCREMENT dla tabeli `galleries`
 --
 ALTER TABLE `galleries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `posts`
+-- AUTO_INCREMENT dla tabeli `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- Constraints for dumped tables
+-- Ograniczenia dla zrzutów tabel
 --
 
 --
--- Constraints for table `comments`
+-- Ograniczenia dla tabeli `comments`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`author`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`post`) REFERENCES `posts` (`id`);
 
 --
--- Constraints for table `galleries`
+-- Ograniczenia dla tabeli `galleries`
 --
 ALTER TABLE `galleries`
   ADD CONSTRAINT `galleries_ibfk_1` FOREIGN KEY (`author`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `posts`
+-- Ograniczenia dla tabeli `posts`
 --
 ALTER TABLE `posts`
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`gallery`) REFERENCES `galleries` (`id`);
