@@ -3,7 +3,7 @@ $(document).ready(function() {
         window.location.href = './';
         return;
     }
-    
+
     const passwordRegex = /^.{6,20}$/;
     const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
 
@@ -17,31 +17,25 @@ $(document).ready(function() {
         $('.form-group input').removeClass('error');
     }
 
-    $('#register-form').on('submit', function(e) {
+    $('#login-form').on('submit', function(e) {
         e.preventDefault();
         clearWarnings();
         
         const username = $('#username').val();
         const password = $('#password').val();
-        const confirmPassword = $('#confirm-password').val();
 
         if (!usernameRegex.test(username)) {
-            showWarning('username', 'Username must be 3-20 characters long and can only contain letters, numbers, and underscores.');
+            showWarning('username', 'Invalid username format.');
             return;
         }
 
         if (!passwordRegex.test(password)) {
-            showWarning('password', 'Password must be between 6 and 20 characters long.');
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            showWarning('confirm-password', 'Passwords do not match.');
+            showWarning('password', 'Invalid password format.');
             return;
         }
 
         $.ajax({
-            url: './api/user.php',
+            url: './api/auth.php',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -50,17 +44,15 @@ $(document).ready(function() {
             }),
             success: function(response) {
                 if (response.error) {
-                    if(response.error.includes('Duplicate entry')) {
-                        showWarning('username', 'Username already exists. Please choose another one.');
-                    } else 
                     showWarning('username', response.error);
                     return;
                 }
-                window.location.href = './login.html';
+                console.log('Login successful, redirecting...');
+                window.location.href = './';
             },
             error: function(xhr, status, error) {
-                console.error('Error during registration:', error);
-                showWarning('username', 'Registration failed. Please try again later.');
+                console.error('Error during login:', error);
+                showWarning('username', 'Login failed. Please try again later.');
             }
         });
     });
