@@ -93,6 +93,30 @@ function handleUpload() {
         
         $targetPath = $galleryDir . "/thumbnail.jpg";
         $relativePath = $relativeDir . $galleryId . "/thumbnail.jpg";
+    } else if ($type === 'post') {
+        $gallery_id = isset($_POST['gallery_id']) ? (int)$_POST['gallery_id'] : null;
+        $sql = "INSERT INTO posts (title, gallery) VALUES ('$title', $gallery_id)";
+        $db->query($sql);
+        
+        // get id of new post
+        $postId = $db->lastInsertId();
+        
+        
+        // Create post directory
+        $postDir = $uploadDir . $postId;
+        if (!file_exists($postDir)) {
+            if (!mkdir($postDir, 0777, true)) {
+                error_log("Failed to create post directory: " . $postDir);
+                return ['error' => 'Failed to create post directory'];
+            }
+            chmod($postDir, 0777);
+        }
+        
+        $targetPath = $postDir . "/thumbnail.jpg";
+        $relativePath = $relativeDir . $postId . "/thumbnail.jpg";
+    } else {
+        error_log("Invalid type specified: " . $type);
+        return ['error' => 'Invalid type specified'];
     }
 
     // Check directory permissions for the target directory

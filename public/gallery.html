@@ -7,6 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/gallery.css">
+    <link rel="shortcut icon" href="./img/cccoil.svg" type="image/x-icon">
     <script src="js/types.js"></script>
     <script src="js/gallery.js"></script>
     <script src="js/header.js"></script>
@@ -31,8 +32,20 @@
     </header>
     <main class="gallery-page">
         <div class="gallery-header">
-            <h1 class="gallery-title">Loading...</h1>
-            <p class="gallery-author">by <span class="author-name">...</span></p>
+            <div class="gallery-info">
+                <h1 class="gallery-title">Loading...</h1>
+                <p class="gallery-author">by <span class="author-name">...</span></p>
+            </div>
+            <img class="gallery-thumbnail" alt="Gallery thumbnail">
+        </div>
+        <div class="upload-section" style="display: none;">
+            <form id="uploadPostForm" class="post-upload-form">
+                <h3>Add New Post</h3>
+                <input type="text" name="title" placeholder="Post Title" required>
+                <input type="file" name="image" accept="image/*" required>
+                <button type="submit">Create Post</button>
+                <input type="hidden" name="type" value="post">
+            </form>
         </div>
         <div class="gallery-content">
             <div class="posts-container">
