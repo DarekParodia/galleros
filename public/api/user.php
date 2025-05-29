@@ -1,5 +1,13 @@
 <?php
-header('Access-Control-Allow-Origin: http://localhost:4200');
+header("Access-Control-Allow-Origin: http://localhost:4200");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE, PATCH");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Credentials: true");
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 require_once '../../php/_user.php';
 require_once '../../php/_database.php';
 
