@@ -1,5 +1,5 @@
 <?php
-
+header('Access-Control-Allow-Origin: http://localhost:4200');
 session_start();
 
 // Clear session data

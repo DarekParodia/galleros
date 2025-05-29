@@ -1,5 +1,5 @@
 <?php
-
+header('Access-Control-Allow-Origin: http://localhost:4200');
 require_once "../../php/_post.php";
 require_once "../../php/_gallery.php";
 require_once "../../php/_comment.php";

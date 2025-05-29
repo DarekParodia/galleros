@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: http://localhost:4200');
 require_once '../../php/_database.php';
 
 error_reporting(E_ALL);
